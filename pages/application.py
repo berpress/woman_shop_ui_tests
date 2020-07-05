@@ -2,6 +2,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.login_page import LoginPage
+from pages.main_page import MainPage
 
 
 class Application:
@@ -10,6 +11,7 @@ class Application:
         self.wd = webdriver.Chrome(driver_path)
         self.base_url = base_url
         self.login = LoginPage(self)
+        self.main_page = MainPage(self)
 
     def open_main_page(self):
         self.wd.get(self.base_url)
