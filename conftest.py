@@ -24,13 +24,13 @@ def pytest_addoption(parser):
     parser.addoption(
         "--username",
         action="store",
-        default="fobiw39468@homedepinst.com",
+        default="orchid345617@gmail.com",
         help="enter username",
     ),
     parser.addoption(
         "--password",
         action="store",
-        default="Password11",
+        default="Qwerty12345",
         help="enter password",
     ),
 
