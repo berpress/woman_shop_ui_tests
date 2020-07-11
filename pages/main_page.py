@@ -3,7 +3,6 @@ from locators.main_page import MainPageLocators
 from selenium.webdriver.common.keys import Keys
 
 
-
 class MainPage:
     """Main page class."""
     def __init__(self, app):
