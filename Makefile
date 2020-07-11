@@ -1,0 +1,2 @@
+pytest:
+	@pytest -s -v
