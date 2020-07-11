@@ -13,3 +13,5 @@ def test_search(app, input_value):
     app.open_main_page()
     app.main_page.search(input_value)
     assert app.main_page.search_result(), "Строка results have been found не найдена."
+
+
