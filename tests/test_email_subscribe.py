@@ -1,12 +1,15 @@
+import faker
+
 
 def test_email_subscribe(app):
     """
-    Steps
+    Шаги:
+    1. Открывается главная страница
+    2. Вводим email и делаем тап на кнопку ">"
+    3. Проверяем наличие элемента на странице
     """
     app.open_main_page()
-    app.newsletter.input_email(email='orch2id11333@gmail.com')
-    app.newsletter.submit_subscribe()
-    assert app.newsletter.check_exists_by_class_name('alert alert-success') == 0, \
-        'Элемент не был найден на странице'
-
-
+    fake = faker.Faker()
+    login = fake.email()
+    app.newsletter.email_subscribe(login)
+    assert app.newsletter.check_success_alert(), "Элемент не был найден."
