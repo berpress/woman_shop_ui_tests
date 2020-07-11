@@ -5,14 +5,18 @@ from selenium.webdriver.common.keys import Keys
 
 class MainPage:
     """Main page class."""
+
     def __init__(self, app):
         self.app = app
-        
+
     def search_field(self):
         return self.app.wd.find_element(*MainPageLocators.SEARCH_FIELD)
 
-    def search_result(self):
-        return self.app.wd.find_element(*MainPageLocators.SEARCH_RESULT).is_displayed()
+    def negative_search_result(self):
+        return self.app.wd.find_element(*MainPageLocators.NEGATIVE_SEARCH_RESULT).text
+
+    def positive_search_result(self):
+        return self.app.wd.find_element(*MainPageLocators.POSITIVE_SEARCH_RESULT).text
 
     def search(self, input_value):
         """Ввод значения в поле поиска и нажатие клавиши ENTER."""
@@ -42,4 +46,3 @@ class MainPage:
 
     def woman_category_text(self):
         return self.woman_category().text
-
