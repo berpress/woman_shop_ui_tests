@@ -9,9 +9,8 @@ def test_valid_email(app):
     3. Проверяем наличие элемента на странице
     """
     app.open_main_page()
-    fake = faker.Faker()
-    login = fake.email()
-    app.newsletter.email_subscribe(login)
+    valid_email = app.newsletter.generate_valid_email()
+    app.newsletter.email_subscribe(valid_email)
     assert app.newsletter.check_success_alert(), "Элемент не был найден."
 
 
@@ -23,9 +22,8 @@ def test_invalid_email(app):
     3. Проверяем наличие элемента на странице
     """
     app.open_main_page()
-    fake = faker.Faker()
-    login = fake.name()
-    app.newsletter.email_subscribe(login)
+    invalid_email = app.newsletter.generate_invalid_email()
+    app.newsletter.email_subscribe(invalid_email)
     assert app.newsletter.check_unsuccessful_alert(), "Элемент не был найден."
 
 
