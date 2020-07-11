@@ -7,7 +7,7 @@ class SubscribeFunction:
     def __init__(self, app):
         self.app = app
 
-    def input_email_and_submit_subscribe(self, email: str) -> None:
+    def email_subscribe(self, email: str) -> None:
         driver = self.app.wd
         element = driver.find_element(*NewsLettersLocators.INPUT_EMAIL_FIELD)
         element.send_keys(email)

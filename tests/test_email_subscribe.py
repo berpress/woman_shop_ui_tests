@@ -11,5 +11,5 @@ def test_email_subscribe(app):
     app.open_main_page()
     fake = faker.Faker()
     login = fake.email()
-    app.newsletter.input_email_and_submit_subscribe(login)
+    app.newsletter.email_subscribe(login)
     assert app.newsletter.check_success_alert(), "Элемент не был найден."
