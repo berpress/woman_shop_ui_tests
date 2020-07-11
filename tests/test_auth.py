@@ -32,7 +32,6 @@ def test_empty_email_auth(app):
     assert app.login.login_auth_alert_get_text() == AutorizedUser.AUTH_EMAIL_ALERT_TEXT
 
 
-@pytest.mark.skip(reason='Падает на assert')
 def test_empty_password_auth(app):
     """
     Шаги
@@ -44,7 +43,7 @@ def test_empty_password_auth(app):
     app.open_main_page()
     user_data = UserData(login='test1910md@mail.ru', password=None)
     app.login.auth(user_data)
-    assert app.login.login_auth_alert_get_text() == AutorizedUser.AUTH_PASS_ALERT_TEXT
+    assert app.login.login_auth_alert_get_text() == AutorizedUser.AUTH_PASS_ALERT_TEXT_EMPTY_PASSWORD
 
 
 def test_incorrect_email_auth(app):
