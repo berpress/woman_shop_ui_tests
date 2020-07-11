@@ -34,14 +34,14 @@ class SubscribeFunction:
         valid_email = fake.email()
         return valid_email
 
-# def email_subscribe_get_text(self):
-#     return self.success_alert().text
-#
-# def email_subscribe_get_text_1(self):
-#     return self.unsuccessful_alert().text
-#
-# def success_alert(self):
-#     return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT)
-#
-# def unsuccessful_alert(self):
-#     return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT)
+    def email_subscribe_get_text(self) -> str:
+        return self.success_alert().text
+
+    def success_alert(self) -> str:
+        return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT)
+
+    def email_subscribe_get_text_with_error(self) -> str:
+        return self.unsuccessful_alert().text
+
+    def unsuccessful_alert(self) -> str:
+        return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT)
