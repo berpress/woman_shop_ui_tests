@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.mark.parametrize("input_value", ["123", 'dress'])
+@pytest.mark.parametrize("input_value", ["123", "dress"])
 def test_search(app, input_value):
     """
     Шаги
