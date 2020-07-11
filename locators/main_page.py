@@ -11,4 +11,3 @@ class MainPageLocators:
     WOMAN_CATEGORY = (By.CLASS_NAME, 'sf-with-ul')
     SEARCH_FIELD = (By.ID, 'search_query_top')
     SEARCH_RESULT = (By.XPATH, '//span[@class="heading-counter"]')
-
