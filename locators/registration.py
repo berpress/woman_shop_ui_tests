@@ -3,10 +3,11 @@ from common.constants import MY_ACCOUNT
 
 
 class RegistrationLocators:
+    # Форма подготовки к регистрации (ввод емейла)
     EMAIL = (By.ID, 'email_create')
     SIGN_IN_BUTTON = (By.CLASS_NAME, 'header_user_info')
     SUBMIT_CREATE = (By.ID, 'SubmitCreate')
-
+    # Форма регистрации
     FIRST_NAME = (By.ID, 'customer_firstname')
     LAST_NAME = (By.ID, 'customer_lastname')
     PASSWORD = (By.ID, 'passwd')
@@ -18,5 +19,5 @@ class RegistrationLocators:
     MOBILE_PHONE = (By.ID, 'phone_mobile')
     ADDRESS_ALIAS = (By.ID, 'alias')
     REGISTER_BUTTON = (By.ID, 'submitAccount')
-
-    MY_ACCOUNT = (By.XPATH, '//h1[text()="My account"]')
+    # Константа - признак, что мы в личном кабинете
+    MY_ACCOUNT = MY_ACCOUNT

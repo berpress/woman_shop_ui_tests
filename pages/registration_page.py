@@ -1,8 +1,6 @@
 from locators.registration import RegistrationLocators
 from model.registration import RegistrationUserData
 from selenium.common.exceptions import NoSuchElementException
-# from pages.application import Application
-from time import sleep
 
 
 class RegistrationPage:
@@ -52,7 +50,7 @@ class RegistrationPage:
         return self.app.wd.find_element(*RegistrationLocators.REGISTER_BUTTON)
 
     def my_account(self):
-        return self.app.wd.find_element(*RegistrationLocators.MY_ACCOUNT)
+        return self.app.wd.find_elements(*RegistrationLocators.MY_ACCOUNT)
 
     def start_registration_process(self, user_data: RegistrationUserData):
         self.sign_in_page_button().click()
@@ -68,12 +66,10 @@ class RegistrationPage:
         self.state_list().click()
         self.postal_code_input().send_keys(user_data.postal_code)
         self.mobile_phone_input().send_keys(user_data.mobile_phone)
-        self.address_alias_input().send_keys(user_data.address_alias)
         self.register_button_input().click()
 
     def check_my_account(self):
-        try:
-            self.my_account()
-        except NoSuchElementException:
+        if self.my_account() == 0:
             return False
-        return True
+        else:
+            return True
