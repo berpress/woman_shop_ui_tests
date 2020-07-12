@@ -4,6 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.registration_page import RegistrationPage
 from pages.subscribe_page import SubscribeFunction
 
 
