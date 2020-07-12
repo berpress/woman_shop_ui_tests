@@ -1,4 +1,5 @@
-import faker
+import pytest
+
 from common.Subscribed_Contants import EmailSubscribe
 
 
@@ -15,7 +16,8 @@ def test_valid_email(app):
     assert app.newsletter.email_subscribe_get_text() == EmailSubscribe.VALID_EMAIL_ALERT_TEXT
 
 
-def test_invalid_email(app):
+@pytest.mark.parametrize("email_value", ["123", "yandex", "@", " -*&"])
+def test_invalid_email(app, email_value):
     """
     Шаги:
     1. Открывается главная страница
@@ -23,8 +25,7 @@ def test_invalid_email(app):
     3. Проверяем наличие элемента на странице
     """
     app.open_main_page()
-    invalid_email = app.newsletter.generate_invalid_email()
-    app.newsletter.email_subscribe(invalid_email)
+    app.newsletter.email_subscribe(email_value)
     assert app.newsletter.email_subscribe_get_text_with_error() == EmailSubscribe.INVALID_EMAIL_ALERT_TEXT
 
 

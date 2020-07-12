@@ -24,11 +24,6 @@ class SubscribeFunction:
         return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT) \
             .is_displayed()
 
-    def generate_invalid_email(self) -> str:
-        fake = faker.Faker()
-        invalid_email = fake.name()
-        return invalid_email
-
     def generate_valid_email(self) -> str:
         fake = faker.Faker()
         valid_email = fake.email()
