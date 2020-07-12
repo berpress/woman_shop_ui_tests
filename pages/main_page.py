@@ -43,3 +43,5 @@ class MainPage:
     def woman_category_text(self):
         return self.woman_category().text
 
+    def girl_in_black(self):
+        return self.app.wd.find_element(*MainPageLocators.GIRL_IN_BLACK_DRESS)

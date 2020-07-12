@@ -2,8 +2,11 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
+from pages.goods_page import GoodsPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.my_account_page import My_Account_page
+from pages.my_store_page import MyStorePage
 from pages.subscribe_page import SubscribeFunction
 
 
@@ -11,13 +14,19 @@ class Application:
     def __init__(self, base_url):
         driver_path = ChromeDriverManager().install()
         options: Options = Options()
-        options.headless = True
-        self.wd = webdriver.Chrome(driver_path, options=options)
+        # options.headless = True
+        # self.wd = webdriver.Chrome(driver_path, options=options)
+        self.wd = webdriver.Chrome(driver_path)
         self.base_url = base_url
         self.login = LoginPage(self)
         self.newsletter = SubscribeFunction(self)
         self.main_page = MainPage(self)
-
+        self.my_account = My_Account_page(self)
+        self.my_store = MyStorePage(self)
+        self.goods_page = GoodsPage(self)
 
     def open_main_page(self):
         self.wd.get(self.base_url)
+
+    def open_wishlist(self):
+        self.wd.get('http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist')
