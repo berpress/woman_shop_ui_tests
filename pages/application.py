@@ -14,9 +14,8 @@ class Application:
     def __init__(self, base_url):
         driver_path = ChromeDriverManager().install()
         options: Options = Options()
-        # options.headless = True
-        # self.wd = webdriver.Chrome(driver_path, options=options)
-        self.wd = webdriver.Chrome(driver_path)
+        options.headless = True
+        self.wd = webdriver.Chrome(driver_path, options=options)
         self.base_url = base_url
         self.login = LoginPage(self)
         self.newsletter = SubscribeFunction(self)
@@ -29,4 +28,4 @@ class Application:
         self.wd.get(self.base_url)
 
     def open_wishlist(self):
-        self.wd.get('http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        self.wd.get(self.base_url + 'index.php?fc=module&module=blockwishlist&controller=mywishlist')

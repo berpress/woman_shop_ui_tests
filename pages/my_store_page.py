@@ -13,7 +13,7 @@ class MyStorePage:
         return self.app.wd.find_element(*MyStorePageLocators.SAVE_BUTTON)
 
     def choose_wishlist(self):
-        return self.app.wd.find_element(*GoodsPageLocators.CHOOSE_WISHLIST_BUTTON)
+        return self.app.wd.find_element(*MyStorePageLocators.CHOOSE_WISHLIST_BUTTON)
 
     def name_of_good_wishlist(self):
         return self.app.wd.find_element(*MyStorePageLocators.NAME_OF_GOOD_WISHLIST)

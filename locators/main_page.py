@@ -11,4 +11,4 @@ class MainPageLocators:
     WOMAN_CATEGORY = (By.CLASS_NAME, 'sf-with-ul')
     SEARCH_FIELD = (By.ID, 'search_query_top')
     SEARCH_RESULT = (By.XPATH, '//span[@class="heading-counter"]')
-    GIRL_IN_BLACK_DRESS = (By.XPATH, "/html[1]/body[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/ul[1]/li[2]/div[1]/div[1]/div[1]")
+    GIRL_IN_BLACK_DRESS = (By.PARTIAL_LINK_TEXT, "Blou")
