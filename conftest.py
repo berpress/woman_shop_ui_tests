@@ -39,7 +39,7 @@ def pytest_addoption(parser):
     ),
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def login(app, request):
     app.open_main_page()
     login = request.config.getoption("--username")
