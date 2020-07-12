@@ -2,8 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
+from pages.contact_us import ContactUsForm
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.registration_page import RegistrationPage
 from pages.subscribe_page import SubscribeFunction
 
 
@@ -18,6 +20,7 @@ class Application:
         self.newsletter = SubscribeFunction(self)
         self.main_page = MainPage(self)
         self.registration = RegistrationPage(self)
+        self.contact_us = ContactUsForm(self)
 
     def open_main_page(self):
         self.wd.get(self.base_url)
