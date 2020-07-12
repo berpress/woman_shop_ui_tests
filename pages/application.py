@@ -8,10 +8,10 @@ from pages.subscribe_page import SubscribeFunction
 
 
 class Application:
-    def __init__(self, base_url):
+    def __init__(self, base_url, headless):
         driver_path = ChromeDriverManager().install()
         options: Options = Options()
-        options.headless = True
+        options.headless = headless
         self.wd = webdriver.Chrome(driver_path, options=options)
         self.base_url = base_url
         self.login = LoginPage(self)

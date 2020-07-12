@@ -46,3 +46,10 @@ class MainPage:
 
     def woman_category_text(self):
         return self.woman_category().text
+
+    def add_ro_cart_button(self):
+        """Выбирает первый товар из списка элементов на главной странице."""
+        return self.app.wd.find_elements(*MainPageLocators.ADD_TO_CART_BUTTONS)[0]
+
+    def proceed_to_checkout_button(self):
+        return self.app.wd.find_element(*MainPageLocators.PROCEED_TO_CHECKOUT_BUTTON)
