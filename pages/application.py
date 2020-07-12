@@ -17,6 +17,7 @@ class Application:
         self.login = LoginPage(self)
         self.newsletter = SubscribeFunction(self)
         self.main_page = MainPage(self)
+        self.registration = RegistrationPage(self)
 
     def open_main_page(self):
         self.wd.get(self.base_url)
