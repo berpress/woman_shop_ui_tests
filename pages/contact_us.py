@@ -27,13 +27,10 @@ class ContactUsForm:
         element = driver.find_element(*ContactUsLocators.ORDER_REFERENCE)
         element.send_keys(text)
 
-    def click_on_choose_file(self):  # на данный момент не работает, ругается на 37-ю строку
+    def click_on_choose_file(self):
         driver = self.app.wd
         element = driver.find_element(*ContactUsLocators.CHOOSE_FILE_BUTTON)
-        time.sleep(6)
-        element.click()
-        time.sleep(6)
-        element.send_keys("C:/Users/orchi/file.txt")
+        element.send_keys(r"C:\Users\orchi\PycharmProjects\woman_shop_ui_tests")
 
     def choose_file_for_upload(self):  # заготовка
         pass

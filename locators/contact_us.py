@@ -8,7 +8,7 @@ class ContactUsLocators:
     SUBJECT_HEADING = (By.ID, "id_contact")
     EMAIL_ADDRESS = (By.ID, "email")
     ORDER_REFERENCE = (By.NAME, "id_order")
-    CHOOSE_FILE_BUTTON = (By.ID, "uniform-fileUpload")
+    CHOOSE_FILE_BUTTON = (By.ID, "fileUpload")
     MESSAGE_INPUT_FILED = (By.ID, "message")
     SEND_MESSAGE_BUTTON = (By.ID, "submitMessage")
     SUCCESS_ALERT = (By.XPATH, '//*[@class="alert alert-success"]')

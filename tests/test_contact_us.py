@@ -1,3 +1,5 @@
+import time
+
 from common.ContactUs_Constants import ContactUs
 
 
@@ -21,6 +23,7 @@ def test_contact_us_field(app):
     # app.contact_us.click_on_choose_file()
     app.contact_us.input_message_text(text="Text in message field")
     app.contact_us.click_in_send_button()
+    time.sleep(6)
     assert app.contact_us.get_text_from_success_alert() == ContactUs.SUCCESS_ALERT
 
 
