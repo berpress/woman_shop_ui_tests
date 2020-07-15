@@ -39,7 +39,7 @@ def pytest_addoption(parser):
     ),
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def login(app, request):
     app.open_main_page()
     login = request.config.getoption("--username")
@@ -47,4 +47,5 @@ def login(app, request):
     user_data = UserData(login=login, password=password)
     app.login.auth(user_data)
     yield app
-    app.wd.quit()
+    app.open_main_page()
+    app.login.logout_button_click()
