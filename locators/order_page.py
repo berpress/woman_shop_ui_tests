@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 class OrderPageLocators:
     SUMMARY_PROCEED_TO_CHECKOUT_BUTTON = (
         By.XPATH,
-        "//a[@class = " '"button btn btn-default standard-checkout button-medium"]',
+        '//a[@class = "button btn btn-default standard-checkout button-medium"]',
     )
     ADDRESS_PROCEED_TO_CHECKOUT_BUTTON = (By.XPATH, '//button[@name= "processAddress"]')
     SHIPPING_PROCEED_TO_CHECKOUT_BUTTON = (
@@ -22,3 +22,9 @@ class OrderPageLocators:
         By.XPATH,
         '//p[@class = "payment_module"]/a[@class = "cheque"]',
     )
+    CONFIRM_ORDER_BUTTON = (
+        By.XPATH,
+        '//button[@class="button btn btn-default button-medium"]',
+    )
+    ORDER_CREATED_TEXT = (By.XPATH, '//div[@class="box"]//strong[@class="dark"]')
+    ORDER_INFO = (By.XPATH, '//div[@class="box"]')

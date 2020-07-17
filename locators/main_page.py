@@ -14,12 +14,12 @@ class MainPageLocators:
     SEARCH_RESULT = (By.XPATH, '//span[@class="heading-counter"]')
     NEGATIVE_SEARCH_RESULT = (By.XPATH, '//p[@ class = "alert alert-warning"]')
     POSITIVE_SEARCH_RESULT = (By.XPATH, '//span[@class = "lighter"]')
-
     ADD_TO_CART_BUTTONS = (
         By.XPATH,
-        "//a[@class = " '"button ajax_add_to_cart_button btn btn-default"]',
+        '//a[@class = "button ajax_add_to_cart_button btn btn-default"]',
     )
+    FIRST_GOOD_ON_MAIN_PAGE = (By.XPATH, '//div[@class="product-image-container"]')
     PROCEED_TO_CHECKOUT_BUTTON = (
         By.XPATH,
-        "//a[@class = " '"btn btn-default button button-medium"]',
+        '//a[@class = "btn btn-default button button-medium"]',
     )
