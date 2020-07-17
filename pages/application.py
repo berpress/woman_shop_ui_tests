@@ -29,3 +29,11 @@ class Application:
 
     def open_wishlist(self):
         self.wd.get(self.base_url + 'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+
+    @staticmethod
+    def click_on_locator(locator):
+        locator.click()
+
+    @staticmethod
+    def send_keys_to_locator(locator, text):
+        locator.send_keys(text)
