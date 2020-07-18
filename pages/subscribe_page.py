@@ -1,32 +1,42 @@
-from selenium.webdriver.common.by import By
+import faker
 
-from locators.subscribe import NewsLettersLocators
-from selenium.common.exceptions import NoSuchElementException
+from locators.subscribe import SubscribeLocators
 
 
 class SubscribeFunction:
+    """Класс с функциями для подписки на рассылку."""
+
     def __init__(self, app):
         self.app = app
 
-    def input_email(self, email: str) -> None:
-        """Ввод email."""
+    def email_subscribe(self, email: str) -> None:
         driver = self.app.wd
-        element = driver.find_element(*NewsLettersLocators.INPUT_EMAIL_FIELD)
+        element = driver.find_element(*SubscribeLocators.INPUT_EMAIL_FIELD)
         element.send_keys(email)
-
-    def submit_subscribe(self) -> None:
-        """Клик по кнопке 'подписаться'."""
-        driver = self.app.wd
-        element = driver.find_element(*NewsLettersLocators.SEND_BUTTON)
+        element = driver.find_element(*SubscribeLocators.SEND_BUTTON)
         element.click()
 
-    def get_page(self) -> None:
-        """Получение все страницы."""
-        return self.app.wd.page_source()
+    def check_success_alert(self) -> bool:
+        return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT) \
+            .is_displayed()
 
-    def check_exists_by_class_name(self, class_name) -> int:
-        try:
-            self.app.wd.find_element(By.CLASS_NAME, class_name)
-            return 1
-        except NoSuchElementException:
-            return 0
+    def check_unsuccessful_alert(self) -> bool:
+        return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT) \
+            .is_displayed()
+
+    def generate_valid_email(self) -> str:
+        fake = faker.Faker()
+        valid_email = fake.email()
+        return valid_email
+
+    def email_subscribe_get_text(self) -> str:
+        return self.success_alert().text
+
+    def success_alert(self) -> str:
+        return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT)
+
+    def email_subscribe_get_text_with_error(self) -> str:
+        return self.unsuccessful_alert().text
+
+    def unsuccessful_alert(self) -> str:
+        return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT)

@@ -1,3 +1,4 @@
+from common.Login_Constants import AutorizedUser
 from locators.login import LoginLocators
 from model.login import UserData
 
@@ -18,6 +19,12 @@ class LoginPage:
     def login_button_click(self):
         self.login_button().click()
 
+    def logout_button(self):
+        return self.app.wd.find_element(*LoginLocators.LOGOUT_BUTTON)
+
+    def logout_button_click(self):
+        self.logout_button().click()
+
     def login_button_get_text(self):
         return self.login_button().text
 
@@ -35,7 +42,11 @@ class LoginPage:
         :param user_data: Class UserData, attribuites (Login: str, Password: str)
         :param is_submit: Attribuit, Boolean
         """
-        self.login_button_click()
+        if self.app.login.login_button_get_text() == AutorizedUser.AUTH_USER:
+            self.logout_button_click()
+            self.login_button_click()
+        else:
+            self.login_button_click()
         if user_data.login is not None:
             self.email_input().send_keys(user_data.login)
         if user_data.password is not None:
