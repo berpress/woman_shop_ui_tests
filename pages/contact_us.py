@@ -1,5 +1,3 @@
-import time
-
 from locators.contact_us import ContactUsLocators
 
 
@@ -27,10 +25,10 @@ class ContactUsForm:
         element = driver.find_element(*ContactUsLocators.ORDER_REFERENCE)
         element.send_keys(text)
 
-    def click_on_choose_file(self):
+    def click_on_choose_file(self, path):
         driver = self.app.wd
         element = driver.find_element(*ContactUsLocators.CHOOSE_FILE_BUTTON)
-        element.send_keys(r"C:\Users\orchi\PycharmProjects\woman_shop_ui_tests")
+        element.send_keys(path)
 
     def choose_file_for_upload(self):  # заготовка
         pass
@@ -46,12 +44,12 @@ class ContactUsForm:
         element.click()
 
     def check_success_alert(self) -> bool:
-        return self.app.wd.find_element(*ContactUsLocators.SUCCESS_ALERT) \
-            .is_displayed()
+        return self.app.wd.find_element(*ContactUsLocators.SUCCESS_ALERT).is_displayed()
 
     def check_unsuccessful_alert(self) -> bool:
-        return self.app.wd.find_element(*ContactUsLocators.INVALID_EMAIL_ALERT) \
-            .is_displayed()
+        return self.app.wd.find_element(
+            *ContactUsLocators.INVALID_EMAIL_ALERT
+        ).is_displayed()
 
     def get_text_from_success_alert(self) -> str:
         return self.success_alert().text
