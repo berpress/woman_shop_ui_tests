@@ -14,7 +14,7 @@ def test_registration_positive(app):
     8. Проверяем, что оказались в личном кабинете
     """
     user_data = RegistrationUserData(
-        email="te924764353453453787st@em32ail.inno",
+        email="tes34t@emewr4543264ail.inno",
         first_name="Vlad",
         last_name="Lubomski",
         password="123456",
