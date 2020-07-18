@@ -49,6 +49,12 @@ class MainPage:
     def woman_category_text(self):
         return self.woman_category().text
 
+    def girl_in_black(self):
+        return self.app.wd.find_element(*MainPageLocators.GIRL_IN_BLACK_DRESS)
+
+    def click_on_girl_in_black(self):
+        return self.girl_in_black().click()
+      
     def add_to_cart_button(self):
         """Выбирает первый товар из списка элементов на главной странице."""
         elem = self.app.wd.find_elements(*MainPageLocators.ADD_TO_CART_BUTTONS)[0]

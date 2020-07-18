@@ -12,6 +12,7 @@ class MainPageLocators:
     WOMAN_CATEGORY = (By.CLASS_NAME, "sf-with-ul")
     SEARCH_FIELD = (By.ID, "search_query_top")
     SEARCH_RESULT = (By.XPATH, '//span[@class="heading-counter"]')
+    GIRL_IN_BLACK_DRESS = (By.PARTIAL_LINK_TEXT, "Blou")
     NEGATIVE_SEARCH_RESULT = (By.XPATH, '//p[@ class = "alert alert-warning"]')
     POSITIVE_SEARCH_RESULT = (By.XPATH, '//span[@class = "lighter"]')
     ADD_TO_CART_BUTTONS = (
