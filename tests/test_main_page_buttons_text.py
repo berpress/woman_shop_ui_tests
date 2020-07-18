@@ -1,5 +1,5 @@
 """Test for Main pages button's text"""
-from common.constants import CART_BUTTON_TEXT, CONTACT_US_BUTTON_TEXT,SIGN_IN_BUTTON_TEXT,WOMAN_BUTTON_TEXT
+from common.constants import CART_BUTTON_TEXT, CONTACT_US_BUTTON_TEXT, SIGN_IN_BUTTON_TEXT, WOMAN_BUTTON_TEXT
 
 
 def test_main_page_buttons_text(app):

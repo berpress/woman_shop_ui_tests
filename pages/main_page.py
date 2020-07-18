@@ -1,18 +1,24 @@
 """Main page."""
+from selenium.webdriver import ActionChains
+
 from locators.main_page import MainPageLocators
 from selenium.webdriver.common.keys import Keys
 
 
 class MainPage:
     """Main page class."""
+
     def __init__(self, app):
         self.app = app
-        
+
     def search_field(self):
         return self.app.wd.find_element(*MainPageLocators.SEARCH_FIELD)
 
-    def search_result(self):
-        return self.app.wd.find_element(*MainPageLocators.SEARCH_RESULT).is_displayed()
+    def negative_search_result(self):
+        return self.app.wd.find_element(*MainPageLocators.NEGATIVE_SEARCH_RESULT).text
+
+    def positive_search_result(self):
+        return self.app.wd.find_element(*MainPageLocators.POSITIVE_SEARCH_RESULT).text
 
     def search(self, input_value):
         """Ввод значения в поле поиска и нажатие клавиши ENTER."""
@@ -43,3 +49,23 @@ class MainPage:
     def woman_category_text(self):
         return self.woman_category().text
 
+    def girl_in_black(self):
+        return self.app.wd.find_element(*MainPageLocators.GIRL_IN_BLACK_DRESS)
+
+    def click_on_girl_in_black(self):
+        return self.girl_in_black().click()
+      
+    def add_to_cart_button(self):
+        """Выбирает первый товар из списка элементов на главной странице."""
+        elem = self.app.wd.find_elements(*MainPageLocators.ADD_TO_CART_BUTTONS)[0]
+        return elem.click()
+
+    def focus_first_good(self):
+        """Наводит мышкой на первый товар из списка элементов на главной странице."""
+        actions = ActionChains(self.app.wd)
+        elem = self.app.wd.find_elements(*MainPageLocators.FIRST_GOOD_ON_MAIN_PAGE)[0]
+        actions.move_to_element(elem).perform()
+
+    def proceed_to_checkout_button(self):
+        elem = self.app.wd.find_element(*MainPageLocators.PROCEED_TO_CHECKOUT_BUTTON)
+        return elem.click()
