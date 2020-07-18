@@ -5,9 +5,10 @@ from selenium.webdriver.common.keys import Keys
 
 class MainPage:
     """Main page class."""
+
     def __init__(self, app):
         self.app = app
-        
+
     def search_field(self):
         return self.app.wd.find_element(*MainPageLocators.SEARCH_FIELD)
 
@@ -45,3 +46,6 @@ class MainPage:
 
     def girl_in_black(self):
         return self.app.wd.find_element(*MainPageLocators.GIRL_IN_BLACK_DRESS)
+
+    def click_on_girl_in_black(self):
+        return self.girl_in_black().click()

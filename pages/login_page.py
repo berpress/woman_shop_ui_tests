@@ -30,7 +30,6 @@ class LoginPage:
     def login_auth_alert_get_text(self):
         return self.login_auth_alert().text
 
-
     def auth(self, user_data: UserData, is_submit=True):
         """
         :param user_data: Class UserData, attribuites (Login: str, Password: str)
@@ -43,4 +42,3 @@ class LoginPage:
             self.password_input().send_keys(user_data.password)
         if is_submit:
             self.submit_login().click()
-

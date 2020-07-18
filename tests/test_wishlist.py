@@ -1,5 +1,3 @@
-import time
-
 from model.login import UserData
 
 
@@ -22,14 +20,14 @@ def test_wishlist(app):
     app.open_main_page()
     user_data = UserData(login='pestot@mail.ru', password='221052')
     app.login.auth(user_data)
-    app.click_on_locator(app.my_account.my_wishlist_button())
-    app.send_keys_to_locator(app.my_store.wish_list_input_field(), 'Test wishlist')
-    app.click_on_locator(app.my_store.save_button())
+    app.my_account.click_on_my_wishlist_button()
+    app.my_store.send_keys_to_wishlist_input_field('Test wishlist')
+    app.my_store.click_on_save_button()
     assert 'Test wishlist' in app.my_store.choose_wishlist().text
     app.open_main_page()
-    app.click_on_locator(app.main_page.girl_in_black())
-    app.click_on_locator(app.goods_page.add_to_wishlist_button())
-    app.click_on_locator(app.goods_page.close_fancy_box_button())
+    app.main_page.click_on_girl_in_black()
+    app.goods_page.click_on_add_to_wishlist()
+    app.goods_page.close_fancy_box_button()
     app.open_wishlist()
-    app.click_on_locator(app.my_store.choose_wishlist())
+    app.my_store.click_on_choose_wishlist()
     assert 'Blouse' in app.my_store.name_of_good_wishlist().text
