@@ -26,5 +26,12 @@ class OrderPageLocators:
         By.XPATH,
         '//button[@class="button btn btn-default button-medium"]',
     )
-    ORDER_CREATED_TEXT = (By.XPATH, '//div[@class="box"]//strong[@class="dark"]')
-    ORDER_INFO = (By.XPATH, '//div[@class="box"]')
+    ORDER_CREATED_TEXT_BY_CARD = (
+        By.XPATH,
+        '//div[@class="box"]//strong[@class="dark"]',
+    )
+    ORDER_CREATED_TEXT_BY_CHEQUE = (By.XPATH, '//*[@class="alert alert-success"]')
+    ORDER_INFO_BY_CARD = (By.XPATH, '//div[@class="box"]')
+    ORDER_INFO_BY_CHEQUE = (By.XPATH, '//div[@class="box order-confirmation"]')
+    TERMS_OF_SERVICE_AGREEMENT = (By.XPATH, '//*[@class="fancybox-error"]')
+    COMMENT_FIELD = (By.XPATH, '//*[@class="form-control"]')
