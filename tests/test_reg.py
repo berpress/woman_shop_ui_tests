@@ -1,4 +1,9 @@
+import faker
+
 from model.registration import RegistrationUserData
+
+
+fake = faker.Faker()
 
 
 def test_registration_positive(app):
@@ -14,7 +19,7 @@ def test_registration_positive(app):
     8. Проверяем, что оказались в личном кабинете
     """
     user_data = RegistrationUserData(
-        email="te924764353453453787st@em32ail.inno",
+        email=fake.email(),
         first_name="Vlad",
         last_name="Lubomski",
         password="123456",
@@ -45,7 +50,7 @@ def test_registration_negative(app):
     8. Проверяем, что не оказались в личном кабинете
     """
     user_data = RegistrationUserData(
-        email="tes34t@emewr4543264ail.inno",
+        email=fake.email(),
         first_name=None,
         last_name="Lubomski",
         password="123456",
