@@ -4,20 +4,20 @@ from common.constants import MY_ACCOUNT
 
 class RegistrationLocators:
     # Форма подготовки к регистрации (ввод емейла)
-    EMAIL = (By.ID, 'email_create')
-    SIGN_IN_BUTTON = (By.CLASS_NAME, 'header_user_info')
-    SUBMIT_CREATE = (By.ID, 'SubmitCreate')
+    EMAIL = (By.ID, "email_create")
+    SIGN_IN_BUTTON = (By.CLASS_NAME, "header_user_info")
+    SUBMIT_CREATE = (By.ID, "SubmitCreate")
     # Форма регистрации
-    FIRST_NAME = (By.ID, 'customer_firstname')
-    LAST_NAME = (By.ID, 'customer_lastname')
-    PASSWORD = (By.ID, 'passwd')
-    ADDRESS = (By.ID, 'address1')
-    CITY = (By.ID, 'city')
+    FIRST_NAME = (By.ID, "customer_firstname")
+    LAST_NAME = (By.ID, "customer_lastname")
+    PASSWORD = (By.ID, "passwd")
+    ADDRESS = (By.ID, "address1")
+    CITY = (By.ID, "city")
     STATE = (By.XPATH, '//*[@id="id_state"]/option[2]')
-    POSTAL_CODE = (By.ID, 'postcode')
+    POSTAL_CODE = (By.ID, "postcode")
     COUNTRY = (By.XPATH, '//*[@id="id_country"]/option[2]')
-    MOBILE_PHONE = (By.ID, 'phone_mobile')
-    ADDRESS_ALIAS = (By.ID, 'alias')
-    REGISTER_BUTTON = (By.ID, 'submitAccount')
-    # Константа - признак, что мы в личном кабинете
-    MY_ACCOUNT = MY_ACCOUNT
+    MOBILE_PHONE = (By.ID, "phone_mobile")
+    ADDRESS_ALIAS = (By.ID, "alias")
+    REGISTER_BUTTON = (By.ID, "submitAccount")
+
+    MY_ACCOUNT = (By.XPATH, f'//h1[text()="{MY_ACCOUNT}"]')

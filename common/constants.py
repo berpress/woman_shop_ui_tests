@@ -1,3 +1,3 @@
 # Константы
 
-MY_ACCOUNT = 'MY ACCOUNT'
+MY_ACCOUNT = "My account"
