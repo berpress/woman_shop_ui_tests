@@ -1,6 +1,8 @@
 from model.registration import RegistrationUserData
+import pytest
 
 
+@pytest.mark.skip(reason="Need Faker for email")
 def test_registration_positive(app):
     """
     Шаги
@@ -32,6 +34,7 @@ def test_registration_positive(app):
     assert app.registration.check_my_account(), "Регистрация не удалась"
 
 
+@pytest.mark.skip(reason="Need Faker for email")
 def test_registration_negative(app):
     """
     Шаги
