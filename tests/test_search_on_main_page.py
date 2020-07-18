@@ -1,8 +1,9 @@
 import pytest
-
+import allure
 from common.search_on_main_page import NEGATIVE_SEARCH_RESULT
 
 
+@allure.title("Позитивный тест для поиска на главной странице")
 @pytest.mark.parametrize("input_value", ["dress", "shoes", "blouse"])
 def test_search_positive(app, input_value):
     """
