@@ -5,6 +5,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
+from pages.registration_page import RegistrationPage
 from pages.subscribe_page import SubscribeFunction
 
 
@@ -22,6 +23,7 @@ class Application:
         self.newsletter = SubscribeFunction(self)
         self.main_page = MainPage(self)
         self.order_page = OrderPage(self)
+        self.registration = RegistrationPage(self)
 
     def open_main_page(self):
         self.wd.get(self.base_url)
