@@ -1,5 +1,7 @@
 import pytest
 
+from common.search_on_main_page import NEGATIVE_SEARCH_RESULT
+
 
 @pytest.mark.parametrize("input_value", ["dress", "shoes", "blouse"])
 def test_search_positive(app, input_value):
@@ -30,5 +32,5 @@ def test_search_negative(app, input_value):
     app.main_page.search(input_value)
     assert (
         app.main_page.negative_search_result()
-        == f'No results were found for your search "{input_value}"'
+        == f'{NEGATIVE_SEARCH_RESULT} "{input_value}"'
     ), "Строка No results were found for your search не найдена"

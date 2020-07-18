@@ -4,10 +4,11 @@ from model.login import UserData
 from pages.application import Application
 
 
-@pytest.fixture(scope='session')
-def app():
-    base_url = 'http://automationpractice.com/'
-    fixture = Application(base_url)
+@pytest.fixture(scope="session")
+def app(request):
+    base_url = "http://automationpractice.com/"
+    headless = request.config.getoption("--headless")
+    fixture = Application(base_url, headless)
     fixture.wd.implicitly_wait(10)
     fixture.wd.maximize_window()
     yield fixture
@@ -28,17 +29,23 @@ def pytest_addoption(parser):
         help="enter username",
     ),
     parser.addoption(
-        "--password",
+        "--password", action="store", default="Qwerty12345", help="enter password",
+    ),
+    parser.addoption(
+        "--headless",
         action="store",
-        default="Qwerty12345",
-        help="enter password",
+        default=True,
+        help="launching browser without gui",
     ),
 
 
-@pytest.fixture()
+@pytest.fixture(scope="module")
 def login(app, request):
     app.open_main_page()
     login = request.config.getoption("--username")
     password = request.config.getoption("--password")
     user_data = UserData(login=login, password=password)
     app.login.auth(user_data)
+    yield app
+    app.open_main_page()
+    app.login.logout_button_click()
