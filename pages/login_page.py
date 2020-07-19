@@ -57,5 +57,3 @@ class LoginPage:
     def logout_if_logged_in(self):
         if self.app.wd.find_elements(*LoginLocators.LOGOUT_BUTTON):
             self.logout_button_click()
-        else:
-            pass
