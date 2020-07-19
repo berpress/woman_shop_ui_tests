@@ -53,3 +53,9 @@ class LoginPage:
             self.password_input().send_keys(user_data.password)
         if is_submit:
             self.submit_login().click()
+
+    def logout_if_logged_in(self):
+        if self.app.wd.find_elements(*LoginLocators.LOGOUT_BUTTON):
+            self.logout_button_click()
+        else:
+            pass
