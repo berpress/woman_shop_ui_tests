@@ -11,6 +11,7 @@ from pages.my_store_page import MyStorePage
 from pages.order_page import OrderPage
 from pages.registration_page import RegistrationPage
 from pages.subscribe_page import SubscribeFunction
+from pages.woman_category_page import WomanCategoryPage
 
 
 class Application:
@@ -20,9 +21,6 @@ class Application:
         options.headless = headless
         self.wd = webdriver.Chrome(driver_path, options=options)
         self.base_url = base_url
-        self.order_history_url = (
-            "http://automationpractice.com/index.php?controller" "=history"
-        )
         self.login = LoginPage(self)
         self.newsletter = SubscribeFunction(self)
         self.main_page = MainPage(self)
@@ -31,17 +29,23 @@ class Application:
         self.goods_page = GoodsPage(self)
         self.order_page = OrderPage(self)
         self.registration = RegistrationPage(self)
+        self.woman_category = WomanCategoryPage(self)
 
     @allure.step("Открытие главной страницы")
     def open_main_page(self):
         self.wd.get(self.base_url)
 
     def open_wishlist(self):
-        self.wd.get(self.base_url +
-                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        self.wd.get(
+            self.base_url
+            + "index.php?fc=module&module=blockwishlist&controller=mywishlist"
+        )
 
     def open_order_history_page(self):
-        self.wd.get(self.order_history_url)
+        self.wd.get(self.base_url + "index.php?controller" "=history")
+
+    def open_woman_category_page(self):
+        self.wd.get(self.base_url + "index.php?id_category=3&controller=category")
 
     def get_page_source(self):
         return self.wd.page_source
