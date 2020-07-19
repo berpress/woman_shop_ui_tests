@@ -1,3 +1,7 @@
+import os
+from datetime import datetime
+
+import allure
 import pytest
 
 from model.login import UserData
@@ -49,3 +53,41 @@ def login(app, request):
     yield app
     app.open_main_page()
     app.login.logout_button_click()
+
+
+PATH=lambda p:os.path.abspath(
+        os.path.join(os.path.dirname(__file__),'..',p)
+        )
+
+
+@pytest.mark.hookwrapper(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    pytest_html = item.config.pluginmanager.getplugin('html')
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, 'extra', [])
+    if report.when == 'call':
+        if 'app' in item.fixturenames:
+            driver = item.funcargs['app']
+        xfail = hasattr(report, 'wasxfail')
+        # create file
+        add_name = '{}_{}'.format(report.nodeid.split("::")[1],
+                                  datetime.now().strftime("%Y-%m-%d_%H.%M.%S"))
+        file_name = PATH(os.path.abspath(os.curdir) + '/' + add_name + '.png')
+        driver.wd.get_screenshot_as_file(file_name)
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            cp_file_name = add_name + ".png"
+            # only add additional html on failure
+            html = '<div><img src=' + cp_file_name + ' alt="screenshot" style="width:304px;height:228px;" '
+            extra.append(pytest_html.extras.html(html))
+        report.extra = extra
+
+
+@pytest.fixture(scope="function", autouse=True)
+def screenshot_after_test(app):
+    yield
+    allure.attach(
+        app.wd.get_screenshot_as_png(),
+        name='screenshot',
+        attachment_type=allure.attachment_type.PNG
+    )
