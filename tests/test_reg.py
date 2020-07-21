@@ -2,7 +2,6 @@ import faker
 
 from model.registration import RegistrationUserData
 
-
 fake = faker.Faker()
 
 

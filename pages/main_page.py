@@ -1,4 +1,5 @@
 """Main page."""
+
 import allure
 from selenium.webdriver import ActionChains
 
@@ -57,7 +58,7 @@ class MainPage:
 
     def click_on_girl_in_black(self):
         return self.girl_in_black().click()
-      
+
     def add_to_cart_button(self):
         """Выбирает первый товар из списка элементов на главной странице."""
         elem = self.app.wd.find_elements(*MainPageLocators.ADD_TO_CART_BUTTONS)[0]
