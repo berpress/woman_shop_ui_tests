@@ -26,7 +26,6 @@ def test_add_to_cart_from_searching(app):
     app.goods_page.click_on_quantity_field_minus_button()
     app.goods_page.send_keys_to_quantity_filed(ADD_TO_CART_BLOUSES_NUMBER)
     app.goods_page.click_add_to_cart_button()
-    # time.sleep(5)
     text = app.goods_page.text_of_successfull_additional()
     assert text == SUCCESS_ADD_TO_CART_TEXT
 

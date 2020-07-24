@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.goods_page import GoodsPage
@@ -35,6 +37,9 @@ class Application:
         self.search_result_page = SearchResultPage(self)
         self.ac = ActionChains(self.wd)
 
+    def wait_until_text_in_element(self, input_locator, text_in_locator):
+        wait = WebDriverWait(self.wd, 10).until(EC.text_to_be_present_in_element(input_locator, text_in_locator))
+        return wait
 
     def open_main_page(self):
         self.wd.get(self.base_url)

@@ -1,6 +1,8 @@
 from selenium.webdriver.common.keys import Keys
-from locators.goods_page import GoodsPageLocators
 
+from common.constants import SUCCESS_ADD_TO_CART_TEXT
+from locators.goods_page import GoodsPageLocators
+from selenium.webdriver.support import expected_conditions as EC
 
 class GoodsPage:
     def __init__(self, app):
@@ -19,7 +21,8 @@ class GoodsPage:
         return self.app.wd.find_element(*GoodsPageLocators.SUCCESSFULL_ADD_TO_CART)
 
     def text_of_successfull_additional(self):
-        return self.add_successfull_additional_to_cart().text
+        if self.app.wait_until_text_in_element(GoodsPageLocators.SUCCESSFULL_ADD_TO_CART, SUCCESS_ADD_TO_CART_TEXT):
+            return self.add_successfull_additional_to_cart().text
 
     def click_on_add_to_wishlist(self):
         return self.add_to_wishlist_button().click()
