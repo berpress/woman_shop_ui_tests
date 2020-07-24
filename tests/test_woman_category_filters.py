@@ -4,10 +4,8 @@ import pytest
 
 @pytest.mark.xfail
 @allure.title("Проверка чекбоксов категорий")
-@pytest.mark.parametrize(
-    "categories,size,colors", [("Tops", "S", "White"), ("Dress", "M", "Orange")]
-)
-def test_categories_filters(app, categories, size, colors):
+@pytest.mark.parametrize("categories,size,color", [("Tops", "S", "White")])
+def test_categories_filters(app, categories, size, color):
     """
     Шаги:
     1.Открытие главной страницы
@@ -16,5 +14,5 @@ def test_categories_filters(app, categories, size, colors):
     """
     app.open_main_page()
     app.open_woman_category_page()
-    app.woman_category.make_filters(categories, size, colors)
-    assert app.woman_category.check_result(categories, size, colors)
+    app.woman_category.set_filters(categories, size, color)
+    assert app.woman_category.check_filter_result(categories, size, color)
