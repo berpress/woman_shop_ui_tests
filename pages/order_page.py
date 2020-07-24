@@ -1,3 +1,5 @@
+import allure
+
 from locators.order_page import OrderPageLocators
 import re
 
@@ -6,34 +8,41 @@ class OrderPage:
     def __init__(self, app):
         self.app = app
 
+    @allure.step("Нажатие кнопки Proceed to checkout на этапе summary")
     def summary_proceed_to_checkout(self):
         return self.app.wd.find_element(
             *OrderPageLocators.SUMMARY_PROCEED_TO_CHECKOUT_BUTTON
         ).click()
 
+    @allure.step("Нажатие кнопки Proceed to checkout на этапе address")
     def address_proceed_to_checkout(self):
         return self.app.wd.find_element(
             *OrderPageLocators.ADDRESS_PROCEED_TO_CHECKOUT_BUTTON
         ).click()
 
+    @allure.step("Проставление чекбокса Terms of service на этапе shipping")
     def terms_checkbox_click(self):
         return self.app.wd.find_element(
             *OrderPageLocators.TERMS_OF_SERVICE_CHECKBOX
         ).click()
 
+    @allure.step("Нажатие кнопки Proceed to checkout на этапе shipping")
     def shipping_proceed_to_checkout(self):
         return self.app.wd.find_element(
             *OrderPageLocators.SHIPPING_PROCEED_TO_CHECKOUT_BUTTON
         ).click()
 
+    @allure.step("Выбор оплаты pay by check")
     def pay_by_check(self):
         return self.app.wd.find_element(*OrderPageLocators.PAY_BY_CHECK_BUTTON).click()
 
+    @allure.step("Выбор оплаты pay by bank wire")
     def pay_by_bank_wire(self):
         return self.app.wd.find_element(
             *OrderPageLocators.PAY_BY_BANK_WIRE_BUTTON
         ).click()
 
+    @allure.step("Подтверждение заказа")
     def confirm_order(self):
         return self.app.wd.find_element(*OrderPageLocators.CONFIRM_ORDER_BUTTON).click()
 
@@ -65,6 +74,7 @@ class OrderPage:
         driver = self.app.wd
         return driver.find_element(*OrderPageLocators.TERMS_OF_SERVICE_AGREEMENT).text
 
+    @allure.step("Добавление комментария к заказу на этапе address")
     def input_comment(self, text: str):
         driver = self.app.wd
         element = driver.find_element(*OrderPageLocators.COMMENT_FIELD)

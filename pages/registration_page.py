@@ -1,3 +1,5 @@
+import allure
+
 from locators.registration import RegistrationLocators
 from model.registration import RegistrationUserData
 
@@ -51,6 +53,9 @@ class RegistrationPage:
     def my_account(self):
         return self.app.wd.find_elements(*RegistrationLocators.MY_ACCOUNT)
 
+    @allure.step("Нажатие кнопки sign in на главной странице")
+    @allure.step("Ввод email")
+    @allure.step("Нажатие кнопки create an account")
     def start_registration_process(self, user_data: RegistrationUserData):
         self.sign_in_page_button().click()
         self.email_for_create_input().send_keys(user_data.email)
@@ -61,6 +66,7 @@ class RegistrationPage:
         if value:
             element().send_keys(value)
 
+    @allure.step("Заполнение обязательных полей для регистрации")
     def fill_requireds(self, user_data: RegistrationUserData):
         self.fill_input(self.first_name_input, user_data.first_name)
         self.fill_input(self.last_name_input, user_data.last_name)

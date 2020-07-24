@@ -4,8 +4,6 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.contact_us import ContactUsForm
-from pages.login_page import LoginPage
-from pages.main_page import MainPage
 from pages.goods_page import GoodsPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
@@ -40,10 +38,14 @@ class Application:
     def open_main_page(self):
         self.wd.get(self.base_url)
 
+    @allure.step("Открытие страницы wishlist")
     def open_wishlist(self):
-        self.wd.get(self.base_url +
-                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        self.wd.get(
+            self.base_url
+            + "index.php?fc=module&module=blockwishlist&controller=mywishlist"
+        )
 
+    @allure.step("Открытие страницы истории заказов")
     def open_order_history_page(self):
         self.wd.get(self.order_history_url)
 

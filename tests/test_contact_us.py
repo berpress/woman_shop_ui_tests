@@ -1,6 +1,11 @@
+import allure
+
 from common.ContactUs_Constants import ContactUs
 
 
+@allure.suite("Обратная связь")
+@allure.description("Отправка сообщения CUSTOMER SERVICE с заполнением валидных данных")
+@allure.tag("positive", "ST-29")
 def test_contact_us_field(app):
     """
     1. Открывает главную страницу
@@ -24,6 +29,9 @@ def test_contact_us_field(app):
     assert app.contact_us.get_text_from_success_alert() == ContactUs.SUCCESS_ALERT
 
 
+@allure.suite("Обратная связь")
+@allure.description("Отправка сообщения CUSTOMER SERVICE без выбора Subject Heading")
+@allure.tag("negative", "ST-29")
 def test_contact_us_with_empty_subject_heading(app):
     """
     1. Открывает главную страницу
@@ -49,6 +57,9 @@ def test_contact_us_with_empty_subject_heading(app):
     )
 
 
+@allure.suite("Обратная связь")
+@allure.description("Отправка сообщения CUSTOMER SERVICE с пустыми полем емейла")
+@allure.tag("negative", "ST-29")
 def test_contact_us_with_empty_email(app):
     """
     1. Открывает главную страницу
@@ -74,6 +85,9 @@ def test_contact_us_with_empty_email(app):
     )
 
 
+@allure.suite("Обратная связь")
+@allure.description("Отправка сообщения CUSTOMER SERVICE с пустыми сообщением")
+@allure.tag("negative", "ST-29")
 def test_contact_us_with_empty_message(app):
     """
     1. Открывает главную страницу
