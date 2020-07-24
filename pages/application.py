@@ -1,3 +1,4 @@
+import allure
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
@@ -5,6 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
+from pages.contact_us import ContactUsForm
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
 from pages.goods_page import GoodsPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
@@ -36,16 +40,19 @@ class Application:
         self.registration = RegistrationPage(self)
         self.search_result_page = SearchResultPage(self)
         self.ac = ActionChains(self.wd)
-
+        self.contact_us = ContactUsForm(self)
+        
     def wait_until_text_in_element(self, input_locator, text_in_locator):
         wait = WebDriverWait(self.wd, 10).until(EC.text_to_be_present_in_element(input_locator, text_in_locator))
         return wait
 
+    @allure.step("Открытие главной страницы")
     def open_main_page(self):
         self.wd.get(self.base_url)
 
     def open_wishlist(self):
-        self.wd.get(self.base_url + 'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        self.wd.get(self.base_url +
+                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
 
     def open_order_history_page(self):
         self.wd.get(self.order_history_url)

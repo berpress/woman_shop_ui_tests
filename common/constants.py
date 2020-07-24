@@ -1,6 +1,6 @@
 # Константы
 
-MY_ACCOUNT = 'MY ACCOUNT'
+MY_ACCOUNT = "My account"
 CART_BUTTON_TEXT = "Cart (empty)"
 CONTACT_US_BUTTON_TEXT = "Contact us"
 SIGN_IN_BUTTON_TEXT = "Sign in"

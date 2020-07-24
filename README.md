@@ -39,3 +39,21 @@ pre-commit run --all-files
  ```sh
 pre-commit run <hook_id>
 ```
+ ### Allure
+ #### Установка allure
+ Для генерации отчетов необходимо установить Scoop через PowerShell
+ https://scoop.sh/
+ 
+ После чего нужно выполнить команду 
+  ```sh
+ scoop install allure
+ ```
+ в окне PowerShell
+ 
+ #### Генерация отчетов
+ После прохождения тестов сформируется папка allure_result в корневой директории проекта
+  
+ Для генерации отчета необходимо ввести команду в окне PowerShell
+ ```sh
+ allure serve ${path}\woman_shop_ui_tests\allure_result
+ ```
