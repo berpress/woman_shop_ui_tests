@@ -1,4 +1,5 @@
 """Main page."""
+import allure
 from selenium.webdriver import ActionChains
 
 from locators.main_page import MainPageLocators
@@ -17,9 +18,11 @@ class MainPage:
     def negative_search_result(self):
         return self.app.wd.find_element(*MainPageLocators.NEGATIVE_SEARCH_RESULT).text
 
+    @allure.step("Поиск введенного значения на странице результата поиска.")
     def positive_search_result(self):
         return self.app.wd.find_element(*MainPageLocators.POSITIVE_SEARCH_RESULT).text
 
+    @allure.step("Ввод значения в поле поиска.")
     def search(self, input_value):
         """Ввод значения в поле поиска и нажатие клавиши ENTER."""
         self.search_field().send_keys(input_value)

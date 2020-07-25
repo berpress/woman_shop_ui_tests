@@ -1,7 +1,11 @@
+import allure
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
+from pages.contact_us import ContactUsForm
+from pages.login_page import LoginPage
+from pages.main_page import MainPage
 from pages.goods_page import GoodsPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
@@ -30,12 +34,15 @@ class Application:
         self.goods_page = GoodsPage(self)
         self.order_page = OrderPage(self)
         self.registration = RegistrationPage(self)
+        self.contact_us = ContactUsForm(self)
 
+    @allure.step("Открытие главной страницы")
     def open_main_page(self):
         self.wd.get(self.base_url)
 
     def open_wishlist(self):
-        self.wd.get(self.base_url + 'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        self.wd.get(self.base_url +
+                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
 
     def open_order_history_page(self):
         self.wd.get(self.order_history_url)
