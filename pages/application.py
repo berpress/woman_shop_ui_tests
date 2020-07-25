@@ -42,7 +42,7 @@ class Application:
         )
 
     def open_order_history_page(self):
-        self.wd.get(self.base_url + "index.php?controller" "=history")
+        self.wd.get(self.base_url + "index.php?controller=history")
 
     def open_woman_category_page(self):
         self.wd.get(self.base_url + "index.php?id_category=3&controller=category")
