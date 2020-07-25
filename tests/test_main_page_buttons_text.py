@@ -1,7 +1,17 @@
 """Test for Main pages button's text"""
-from common.constants import CART_BUTTON_TEXT, CONTACT_US_BUTTON_TEXT, SIGN_IN_BUTTON_TEXT, WOMAN_BUTTON_TEXT
+import allure
+
+from common.constants import (
+    CART_BUTTON_TEXT,
+    CONTACT_US_BUTTON_TEXT,
+    SIGN_IN_BUTTON_TEXT,
+    WOMAN_BUTTON_TEXT,
+)
 
 
+@allure.suite("Главная страница")
+@allure.description("Проверка наличия кнопок на главной странице")
+@allure.tag("positive", "ST-7")
 def test_main_page_buttons_text(app):
     """
     Шаги

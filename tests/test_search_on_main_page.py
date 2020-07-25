@@ -3,9 +3,11 @@ import allure
 from common.search_on_main_page import NEGATIVE_SEARCH_RESULT
 
 
-@allure.title("Позитивный тест для поиска на главной странице")
+@allure.suite("Поиск")
+@allure.description("Проверка поиска с валидными данными")
+@allure.tag("positive", "ST-6")
 @pytest.mark.parametrize("input_value", ["dress", "shoes", "blouse"])
-def test_search_positive(app, input_value):
+def test_search_valid_input(app, input_value):
     """
     Шаги
     1. Открываем главную страницу
@@ -20,8 +22,11 @@ def test_search_positive(app, input_value):
     ), "Значение input_value не отображается на странице"
 
 
+@allure.suite("Поиск")
+@allure.description("Проверка поиска с невалидными данными")
+@allure.tag("negative", "ST-6")
 @pytest.mark.parametrize("input_value", ["123", "-1", "zxczxc"])
-def test_search_negative(app, input_value):
+def test_search_invalid_input(app, input_value):
     """
     Шаги
     1. Открываем главную страницу
