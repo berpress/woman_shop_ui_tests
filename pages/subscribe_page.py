@@ -1,3 +1,4 @@
+import allure
 import faker
 
 from locators.subscribe import SubscribeLocators
@@ -9,6 +10,7 @@ class SubscribeFunction:
     def __init__(self, app):
         self.app = app
 
+    @allure.step("Ввод email в поле Newsletter и нажатие кнопки '>'")
     def email_subscribe(self, email: str) -> None:
         driver = self.app.wd
         element = driver.find_element(*SubscribeLocators.INPUT_EMAIL_FIELD)
@@ -17,12 +19,12 @@ class SubscribeFunction:
         element.click()
 
     def check_success_alert(self) -> bool:
-        return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT) \
-            .is_displayed()
+        return self.app.wd.find_element(*SubscribeLocators.SUCCESS_ALERT).is_displayed()
 
     def check_unsuccessful_alert(self) -> bool:
-        return self.app.wd.find_element(*SubscribeLocators.INVALID_EMAIL_ALERT) \
-            .is_displayed()
+        return self.app.wd.find_element(
+            *SubscribeLocators.INVALID_EMAIL_ALERT
+        ).is_displayed()
 
     def generate_valid_email(self) -> str:
         fake = faker.Faker()
