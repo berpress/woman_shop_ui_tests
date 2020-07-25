@@ -21,6 +21,8 @@ class GoodsPage:
     def close_fancy_box_button(self):
         return self.app.wd.find_element(*GoodsPageLocators.CLOSE_FANCY_BOX)
 
+    def close_modal_window_button(self):
+        return self.app.wd.find_element(*GoodsPageLocators.CLOSE_POP_UP)
 
     def add_to_cart_button(self):
         return self.app.wd.find_element(*GoodsPageLocators.ADD_TO_CART)
@@ -32,6 +34,14 @@ class GoodsPage:
         if self.app.wait_until_text_in_element(GoodsPageLocators.SUCCESSFULL_ADD_TO_CART, SUCCESS_ADD_TO_CART_TEXT):
             return self.add_successfull_additional_to_cart().text
 
+    def click_on_close_window_button(self):
+        return self.close_modal_window_button().click()
+
+    def quantity_in_cart(self):
+        return self.app.wd.find_element(*GoodsPageLocators.NUMBER_IN_CART)
+
+    def quantity_in_cart_text(self):
+        return self.quantity_in_cart().text
 
     @allure.step("Нажатие кнопки Add to wishlist")
 
