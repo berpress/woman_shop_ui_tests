@@ -1,6 +1,11 @@
+import allure
+
 from common.order_page import ORDER_CREATED_SUCCESS, TERMS_ALERT
 
 
+@allure.suite("Создание заказа")
+@allure.description("Создание заказа с оплатой при помощи bank_wire")
+@allure.tag("positive", "ST-28")
 def test_create_new_order_with_bank_wire(login):
     """
     Шаги:
@@ -32,6 +37,9 @@ def test_create_new_order_with_bank_wire(login):
     assert code in login.get_page_source()
 
 
+@allure.suite("Создание заказа")
+@allure.description("Создание заказа с оплатой при помощи check")
+@allure.tag("positive", "ST-28")
 def test_create_new_order_with_cheque(login):
     """
     Шаги:
@@ -63,6 +71,9 @@ def test_create_new_order_with_cheque(login):
     assert code in login.get_page_source()
 
 
+@allure.suite("Создание заказа")
+@allure.description("Создание заказа с непроставленным чекбоксом принятия соглашения")
+@allure.tag("negative", "ST-28")
 def test_create_new_order_without_agreement(login):
     """
     Шаги:
@@ -88,6 +99,9 @@ def test_create_new_order_without_agreement(login):
     assert login.order_page.check_terms_of_use() == TERMS_ALERT
 
 
+@allure.suite("Создание заказа")
+@allure.description("Создание заказа с добавлением комментария в заказе")
+@allure.tag("positive", "ST-28")
 def test_create_new_order_with_comment(login):
     """
     Шаги:
@@ -97,7 +111,7 @@ def test_create_new_order_with_comment(login):
     4.Добавление товара в корзину
     5.Переход к оформлению заказа
     6.Нажатие кнопки proceed_to_checkout на шаге summary
-    7. Вводим текст в поле
+    7.Вводим текст в поле
     8.Нажатие кнопки proceed_to_checkout на шаге address
     9.Проставление чекбокса terms of service
     10.Выбор способа оплаты by_bank_wire
