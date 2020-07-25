@@ -1,4 +1,4 @@
-import allure
+# import allure
 from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.options import Options
@@ -43,7 +43,7 @@ class Application:
         wait = WebDriverWait(self.wd, 10).until(EC.text_to_be_present_in_element(input_locator, text_in_locator))
         return wait
 
-    @allure.step("Открытие главной страницы")
+    # @allure.step("Открытие главной страницы")
     def open_main_page(self):
         self.wd.get(self.base_url)
 

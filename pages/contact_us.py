@@ -1,6 +1,10 @@
+from typing import Any
+
+from common.utilities import fill_input
 import allure
 
 from locators.contact_us import ContactUsLocators
+from model.contact_us import ContactUsUserData
 
 
 class ContactUsForm:
@@ -19,6 +23,7 @@ class ContactUsForm:
         element = driver.find_element(*ContactUsLocators.SUBJECT_HEADING)
         element.find_element_by_xpath("//option[text()='Customer service']").click()
 
+
     @allure.step("Ввод email  в поле Email address")
     def click_on_email_field(self, email: str) -> None:
         driver = self.app.wd
@@ -36,6 +41,7 @@ class ContactUsForm:
         driver = self.app.wd
         element = driver.find_element(*ContactUsLocators.CHOOSE_FILE_BUTTON)
         element.send_keys(path)
+
 
     def choose_file_for_upload(self):  # заготовка
         pass
@@ -71,3 +77,24 @@ class ContactUsForm:
 
     def unsuccessful_alert(self) -> str:
         return self.app.wd.find_element(*ContactUsLocators.INVALID_EMAIL_ALERT)
+
+    def click_on_email_field(self) -> Any:
+        driver = self.app.wd
+        return driver.find_element(*ContactUsLocators.EMAIL_ADDRESS)
+
+    def click_on_order_reference_field(self) -> str:
+        driver = self.app.wd
+        return driver.find_element(*ContactUsLocators.ORDER_REFERENCE)
+
+    def input_message_text(self) -> str:
+        driver = self.app.wd
+        return driver.find_element(*ContactUsLocators.MESSAGE_INPUT_FILED)
+
+    def click_in_send_button(self) -> None:
+        driver = self.app.wd
+        driver.find_element(*ContactUsLocators.SEND_MESSAGE_BUTTON).click()
+
+    def fill_data(self, user_data: ContactUsUserData) -> None:
+        fill_input(self.click_on_email_field, user_data.email)
+        fill_input(self.click_on_order_reference_field, user_data.text)
+        fill_input(self.input_message_text, user_data.text_in_form)

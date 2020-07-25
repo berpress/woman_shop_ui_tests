@@ -1,4 +1,5 @@
 """Main page."""
+
 import allure
 from selenium.webdriver import ActionChains
 
@@ -57,6 +58,7 @@ class MainPage:
     @allure.step("girl in black :D")
     def click_on_girl_in_black(self):
         return self.girl_in_black().click()
+
 
     @allure.step("Нажатие кнопки add to cart для первого товара на главной странице")
     def add_to_cart_button(self):
