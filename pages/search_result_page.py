@@ -1,3 +1,5 @@
+import allure
+
 from locators.search_result_page import SearchResultPageLocators
 
 
@@ -11,9 +13,11 @@ class SearchResultPage:
     def result_good(self):
         return self.app.wd.find_element(*SearchResultPageLocators.RESULT_GOOD)
 
+    @allure.step("Переход к результату поиска")
     def move_to_result_button(self):
         return self.app.ac.move_to_element(self.result_good()).perform()
 
+    @allure.step("Нажатие кнопки More")
     def click_on_more_button(self):
         return self.app.ac.move_to_element(self.more_button()).click().perform()
 
