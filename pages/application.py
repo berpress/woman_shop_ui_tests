@@ -27,8 +27,8 @@ logger = logging.getLogger()
 
 class Application:
     def __init__(self, base_url, headless):
-        setup('INFO')
-        logger.setLevel('INFO')
+        setup("INFO")
+        logger.setLevel("INFO")
         driver_path = ChromeDriverManager().install()
         options: Options = Options()
         options.headless = headless
@@ -46,14 +46,16 @@ class Application:
         self.search_result_page = SearchResultPage(self)
         self.ac = ActionChains(self.wd)
         self.contact_us = ContactUsForm(self)
-        
+
     def wait_until_text_in_element(self, input_locator, text_in_locator):
-        wait = WebDriverWait(self.wd, 10).until(EC.text_to_be_present_in_element(input_locator, text_in_locator))
+        wait = WebDriverWait(self.wd, 10).until(
+            EC.text_to_be_present_in_element(input_locator, text_in_locator)
+        )
         return wait
 
     @allure.step("Открытие главной страницы")
     def open_main_page(self):
-        logger.info('Open main page')
+        logger.info("Открытие главной страницы")
         self.wd.get(self.base_url)
 
     @allure.step("Открытие страницы wishlist")
@@ -62,15 +64,19 @@ class Application:
             self.base_url
             + "index.php?fc=module&module=blockwishlist&controller=mywishlist"
         )
-        logger.info('Open wish list')
-        self.wd.get(self.base_url +
-                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
+        logger.info("Открываем wish list")
+        self.wd.get(
+            self.base_url
+            + "index.php?fc=module&module=blockwishlist&controller=mywishlist"
+        )
 
     @allure.step("Открытие страницы истории заказов")
     def open_order_history_page(self):
+        logger.info("Открытие страницы истории заказов")
         self.wd.get(self.base_url + "index.php?controller=history")
 
     def open_woman_category_page(self):
+        logger.info("Открытие страницы категории ")
         self.wd.get(self.base_url + "index.php?id_category=3&controller=category")
 
     def get_page_source(self):
