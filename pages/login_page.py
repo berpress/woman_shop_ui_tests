@@ -1,8 +1,11 @@
 import allure
+import logging
 
 from common.Login_Constants import AutorizedUser
 from locators.login import LoginLocators
 from model.login import UserData
+
+logger = logging.getLogger()
 
 
 class LoginPage:
@@ -41,6 +44,8 @@ class LoginPage:
 
     @allure.step("Авторизация")
     def auth(self, user_data: UserData, is_submit=True):
+        logger.info(f'Try to login with login: {user_data.login} and password: '
+                    f'{user_data.password}')
         """
         :param user_data: Class UserData, attribuites (Login: str, Password: str)
         :param is_submit: Attribuit, Boolean

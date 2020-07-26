@@ -1,4 +1,5 @@
 import allure
+from pytest_testrail.plugin import testrail
 
 from common.Login_Constants import AutorizedUser
 from model.login import UserData
@@ -7,6 +8,7 @@ from model.login import UserData
 @allure.suite("Авторизация")
 @allure.description("Авторизация с валидными данными")
 @allure.tag("positive", "ST-4")
+@testrail('C1')
 def test_auth_shop(app):
     """
     Шаги
