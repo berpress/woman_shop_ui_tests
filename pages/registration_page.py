@@ -74,7 +74,7 @@ class RegistrationPage:
         self.fill_input(self.password_input, user_data.password)
         self.fill_input(self.address_input, user_data.address)
         self.fill_input(self.city_input, user_data.city)
-        self.fill_select(self.state_list(), user_data.state)
+        self.fill_select(self.state_list, user_data.state)
         self.fill_input(self.postal_code_input, user_data.postal_code)
         self.fill_input(self.mobile_phone_input, user_data.mobile_phone)
         self.register_button_input().click()
