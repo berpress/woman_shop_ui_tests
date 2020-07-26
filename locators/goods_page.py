@@ -9,3 +9,5 @@ class GoodsPageLocators:
     QUANTITY_MINUS_BUTTON = (By.XPATH, "//i[@class='icon-minus']")
     ADD_TO_CART = (By.XPATH, "//span[contains(text(),'Add to cart')]")
     SUCCESSFULL_ADD_TO_CART = (By.XPATH, "//h2[contains(.,'Product successfully added to your shopping cart' )]")
+    CLOSE_POP_UP = (By.XPATH, "//span[@class='cross']")
+    NUMBER_IN_CART = (By.XPATH, "//span[@class='ajax_cart_quantity']")
