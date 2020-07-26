@@ -1,7 +1,11 @@
-import time
+import allure
+
 from common.constants import ADD_TO_CART_BLOUSES_NUMBER, SUCCESS_ADD_TO_CART_TEXT
 
 
+@allure.suite("Добавление товара в корзину")
+@allure.description("Проверка добавления товара в корзину через поисковую строку")
+@allure.tag("positive", "ST-25")
 def test_add_to_cart_from_searching(app):
     """
     Шаги:
@@ -18,7 +22,7 @@ def test_add_to_cart_from_searching(app):
     11) Убедиться, что на главной странице в поле Cart изменился счетчик
         """
     app.open_main_page()
-    app.main_page.search('Blouse')
+    app.main_page.search("Blouse")
     app.search_result_page.move_to_result_button()
     assert app.search_result_page.more_button_is_displayed() is True
     app.search_result_page.click_on_more_button()
@@ -30,4 +34,3 @@ def test_add_to_cart_from_searching(app):
     assert text == SUCCESS_ADD_TO_CART_TEXT
     app.goods_page.click_on_close_window_button()
     assert app.goods_page.quantity_in_cart_text() == str(ADD_TO_CART_BLOUSES_NUMBER)
-
