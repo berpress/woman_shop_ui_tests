@@ -2,6 +2,9 @@ import pytest
 from model.registration_model import RegistrationUserData
 
 
+@allure.suite("Регистрация")
+@allure.description("Проверка регистрации с валидными данными")
+@allure.tag("positive", "ST-14")
 def test_registration_positive(app):
     """
     Шаги
@@ -23,7 +26,10 @@ def test_registration_positive(app):
     assert app.registration.check_my_account(), "Регистрация не удалась"
     app.login.logout_if_logged_in()
 
-
+    
+@allure.suite("Регистрация")
+@allure.description("Проверка регистрации с валидными данными и пустым полем имени")
+@allure.tag("negative", "ST-14")    
 @pytest.mark.parametrize("fields", [("last_name", "state")])
 def test_registration_negative(app, fields):
     """

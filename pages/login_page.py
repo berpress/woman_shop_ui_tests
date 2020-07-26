@@ -1,6 +1,11 @@
-from common.Login_Constants import AutorizedUser
+import allure
+import logging
+
+from common.login_constants import AutorizedUser
 from locators.login import LoginLocators
 from model.login import UserData
+
+logger = logging.getLogger()
 
 
 class LoginPage:
@@ -37,7 +42,10 @@ class LoginPage:
     def login_auth_alert_get_text(self):
         return self.login_auth_alert().text
 
+    @allure.step("Авторизация")
     def auth(self, user_data: UserData, is_submit=True):
+        logger.info(f'Try to login with login: {user_data.login} and password: '
+                    f'{user_data.password}')
         """
         :param user_data: Class UserData, attribuites (Login: str, Password: str)
         :param is_submit: Attribuit, Boolean
@@ -54,6 +62,7 @@ class LoginPage:
         if is_submit:
             self.submit_login().click()
 
+    @allure.step("Выход из аккаунта")
     def logout_if_logged_in(self):
         if self.app.wd.find_elements(*LoginLocators.LOGOUT_BUTTON):
             self.logout_button_click()

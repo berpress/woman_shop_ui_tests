@@ -1,5 +1,8 @@
-from locators.registration_locators import RegistrationLocators
 import allure
+
+from locators.registration import RegistrationLocators
+from model.registration import RegistrationUserData
+from common.utilities import fill_input
 
 
 class RegistrationPage:
@@ -51,23 +54,20 @@ class RegistrationPage:
     def my_account(self):
         return self.app.wd.find_elements(*RegistrationLocators.MY_ACCOUNT)
 
-    @allure.step("Подготовка к регистрации - ввод емейла")
-    def start_registration_process(self, user_data):
+    @allure.step("Нажатие кнопки sign in на главной странице")
+    @allure.step("Ввод email")
+    @allure.step("Нажатие кнопки create an account")
+    def start_registration_process(self, user_data: RegistrationUserData):
         self.sign_in_page_button().click()
         self.email_for_create_input().send_keys(user_data.email)
         self.submit_create_button().click()
-
-    def fill_input(self, element, value):
-        """Заполняет поле, если было передано значение value."""
-        if value:
-            element().send_keys(value)
 
     def fill_select(self, element, value):
         """Выбирает селект, если было передано значение value."""
         if value:
             element().click()
-
-    @allure.step("Заполнение полей, которым были переданы данные")
+            
+    @allure.step("Заполнение обязательных полей для регистрации")
     def fill_requireds(self, user_data):
         self.fill_input(self.first_name_input, user_data.first_name)
         self.fill_input(self.last_name_input, user_data.last_name)

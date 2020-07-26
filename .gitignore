@@ -51,8 +51,8 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
-.allure_report
-.allure_result
+allure_report
+allure_result
 
 # Translations
 *.mo

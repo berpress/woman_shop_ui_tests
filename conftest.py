@@ -83,11 +83,45 @@ def pytest_runtest_makereport(item, call):
         report.extra = extra
 
 
-@pytest.fixture(scope="function", autouse=True)
-def screenshot_after_test(app):
-    yield
-    allure.attach(
-        app.wd.get_screenshot_as_png(),
-        name='screenshot',
-        attachment_type=allure.attachment_type.PNG
-    )
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when == 'call' and rep.failed:
+        mode = 'a' if os.path.exists('failures') else 'w'
+        try:
+            with open('failures', mode) as f:
+                if 'app' in item.fixturenames:
+                    web_driver = item.funcargs['app']
+                else:
+                    print('Fail to take screen-shot')
+                    return
+            allure.attach(
+                web_driver.wd.get_screenshot_as_png(),
+                name='screenshot',
+                attachment_type=allure.attachment_type.PNG
+            )
+        except Exception as e:
+            print('Fail to take screen-shot: {}'.format(e))
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when == 'call' and rep.failed:
+        mode = 'a' if os.path.exists('failures') else 'w'
+        try:
+            with open('failures', mode) as f:
+                if 'app' in item.fixturenames:
+                    web_driver = item.funcargs['app']
+                else:
+                    print('Fail to take screen-shot')
+                    return
+            allure.attach(
+                web_driver.wd.get_screenshot_as_png(),
+                name='screenshot',
+                attachment_type=allure.attachment_type.PNG
+            )
+        except Exception as e:
+            print('Fail to take screen-shot: {}'.format(e))
