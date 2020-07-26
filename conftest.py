@@ -1,7 +1,9 @@
-import os
-from datetime import datetime
+import inspect
 
-import allure
+# import os
+# from datetime import datetime
+#
+# import allure
 import pytest
 
 from model.login import UserData
@@ -55,73 +57,108 @@ def login(app, request):
     app.login.logout_button_click()
 
 
-PATH=lambda p:os.path.abspath(
-        os.path.join(os.path.dirname(__file__),'..',p)
-        )
+#
+# PATH = lambda p: os.path.abspath(os.path.join(os.path.dirname(__file__), "..", p))
+#
+#
+# @pytest.mark.hookwrapper(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     pytest_html = item.config.pluginmanager.getplugin("html")
+#     outcome = yield
+#     report = outcome.get_result()
+#     extra = getattr(report, "extra", [])
+#     if report.when == "call":
+#         if "app" in item.fixturenames:
+#             driver = item.funcargs["app"]
+#         xfail = hasattr(report, "wasxfail")
+#         # create file
+#         add_name = "{}_{}".format(
+#             report.nodeid.split("::")[1], datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
+#         )
+#         file_name = PATH(os.path.abspath(os.curdir) + "/" + add_name + ".png")
+#         driver.wd.get_screenshot_as_file(file_name)
+#         if (report.skipped and xfail) or (report.failed and not xfail):
+#             cp_file_name = add_name + ".png"
+#             # only add additional html on failure
+#             html = (
+#                     "<div><img src="
+#                     + cp_file_name
+#                     + ' alt="screenshot" style="width:304px;height:228px;" '
+#             )
+#             extra.append(pytest_html.extras.html(html))
+#         report.extra = extra
+#
+#
+# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     outcome = yield
+#     rep = outcome.get_result()
+#     if rep.when == "call" and rep.failed:
+#         mode = "a" if os.path.exists("failures") else "w"
+#         try:
+#             with open("failures", mode) as f:
+#                 if "app" in item.fixturenames:
+#                     web_driver = item.funcargs["app"]
+#                 else:
+#                     print("Fail to take screen-shot")
+#                     return
+#             allure.attach(
+#                 web_driver.wd.get_screenshot_as_png(),
+#                 name="screenshot",
+#                 attachment_type=allure.attachment_type.PNG,
+#             )
+#         except Exception as e:
+#             print("Fail to take screen-shot: {}".format(e))
+#
+#
+# @pytest.hookimpl(tryfirst=True, hookwrapper=True)
+# def pytest_runtest_makereport(item, call):
+#     outcome = yield
+#     rep = outcome.get_result()
+#     if rep.when == "call" and rep.failed:
+#         mode = "a" if os.path.exists("failures") else "w"
+#         try:
+#             with open("failures", mode) as f:
+#                 if "app" in item.fixturenames:
+#                     web_driver = item.funcargs["app"]
+#                 else:
+#                     print("Fail to take screen-shot")
+#                     return
+#             allure.attach(
+#                 web_driver.wd.get_screenshot_as_png(),
+#                 name="screenshot",
+#                 attachment_type=allure.attachment_type.PNG,
+#             )
+#         except Exception as e:
+#             print("Fail to take screen-shot: {}".format(e))
 
 
-@pytest.mark.hookwrapper(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    pytest_html = item.config.pluginmanager.getplugin('html')
-    outcome = yield
-    report = outcome.get_result()
-    extra = getattr(report, 'extra', [])
-    if report.when == 'call':
-        if 'app' in item.fixturenames:
-            driver = item.funcargs['app']
-        xfail = hasattr(report, 'wasxfail')
-        # create file
-        add_name = '{}_{}'.format(report.nodeid.split("::")[1],
-                                  datetime.now().strftime("%Y-%m-%d_%H.%M.%S"))
-        file_name = PATH(os.path.abspath(os.curdir) + '/' + add_name + '.png')
-        driver.wd.get_screenshot_as_file(file_name)
-        if (report.skipped and xfail) or (report.failed and not xfail):
-            cp_file_name = add_name + ".png"
-            # only add additional html on failure
-            html = '<div><img src=' + cp_file_name + ' alt="screenshot" style="width:304px;height:228px;" '
-            extra.append(pytest_html.extras.html(html))
-        report.extra = extra
+@pytest.mark.trylast
+def pytest_configure(config):
+    terminal_reporter = config.pluginmanager.getplugin("terminalreporter")
+    config.pluginmanager.register(
+        TestDescriptionPlugin(terminal_reporter), "testdescription"
+    )
 
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    outcome = yield
-    rep = outcome.get_result()
-    if rep.when == 'call' and rep.failed:
-        mode = 'a' if os.path.exists('failures') else 'w'
-        try:
-            with open('failures', mode) as f:
-                if 'app' in item.fixturenames:
-                    web_driver = item.funcargs['app']
-                else:
-                    print('Fail to take screen-shot')
-                    return
-            allure.attach(
-                web_driver.wd.get_screenshot_as_png(),
-                name='screenshot',
-                attachment_type=allure.attachment_type.PNG
-            )
-        except Exception as e:
-            print('Fail to take screen-shot: {}'.format(e))
+class TestDescriptionPlugin:
+    """
+    This plugin for log tests steps
+    """
 
+    def __init__(self, terminal_reporter):
+        self.terminal_reporter = terminal_reporter
+        self.desc = None
 
-@pytest.hookimpl(tryfirst=True, hookwrapper=True)
-def pytest_runtest_makereport(item, call):
-    outcome = yield
-    rep = outcome.get_result()
-    if rep.when == 'call' and rep.failed:
-        mode = 'a' if os.path.exists('failures') else 'w'
-        try:
-            with open('failures', mode) as f:
-                if 'app' in item.fixturenames:
-                    web_driver = item.funcargs['app']
-                else:
-                    print('Fail to take screen-shot')
-                    return
-            allure.attach(
-                web_driver.wd.get_screenshot_as_png(),
-                name='screenshot',
-                attachment_type=allure.attachment_type.PNG
-            )
-        except Exception as e:
-            print('Fail to take screen-shot: {}'.format(e))
+    def pytest_runtest_protocol(self, item):
+        self.desc = inspect.getdoc(item.obj)
+
+    @pytest.hookimpl(hookwrapper=True, tryfirst=True)
+    def pytest_runtest_logstart(self, nodeid, location):
+        if self.terminal_reporter.verbosity == 0:
+            yield
+        else:
+            self.terminal_reporter.write("\n")
+            yield
+            if self.desc:
+                self.terminal_reporter.write(f"\n{self.desc} \n")

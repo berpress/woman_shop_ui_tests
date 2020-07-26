@@ -2,6 +2,7 @@ import allure
 
 from common.contact_us_constants import ContactUs
 from model.contact_us import ContactUsUserData
+from pages.application import logger
 
 
 @allure.suite("Обратная связь")
@@ -52,6 +53,7 @@ def test_contact_us_with_empty_subject_heading(app):
         text_in_form="Text in message field",
     )
     app.open_main_page()
+    logger.info("Началось выполнение теста")
     app.contact_us.find_and_click_contact_us_button()
     # app.contact_us.click_on_choose_file(create_tmp_file())
     app.contact_us.fill_data(user_data)
@@ -60,6 +62,7 @@ def test_contact_us_with_empty_subject_heading(app):
         app.contact_us.get_text_from_alert_with_error()
         == ContactUs.EMPTY_SUBJECT_HEADING_ALERT
     )
+    logger.info("Тест успешно завершился")
 
 
 @allure.suite("Обратная связь")
@@ -80,6 +83,7 @@ def test_contact_us_with_empty_email(app):
         email=None, text="Text in order reference", text_in_form="Text in message field"
     )
     app.open_main_page()
+    logger.info("Началось выполнение теста")
     app.contact_us.find_and_click_contact_us_button()
     app.contact_us.click_on_subject_heading_button()
     # app.contact_us.click_on_choose_file(create_tmp_file())
@@ -88,6 +92,7 @@ def test_contact_us_with_empty_email(app):
     assert (
         app.contact_us.get_text_from_alert_with_error() == ContactUs.EMPTY_EMAIL_ALERT
     )
+    logger.info("Тест успешно завершился")
 
 
 @allure.suite("Обратная связь")
@@ -110,6 +115,7 @@ def test_contact_us_with_empty_message(app):
         text_in_form=None,
     )
     app.open_main_page()
+    logger.info("Началось выполнение теста")
     app.contact_us.find_and_click_contact_us_button()
     app.contact_us.click_on_subject_heading_button()
     # app.contact_us.click_on_choose_file(create_tmp_file())
@@ -118,3 +124,4 @@ def test_contact_us_with_empty_message(app):
     assert (
         app.contact_us.get_text_from_alert_with_error() == ContactUs.EMPTY_MESSAGE_ALERT
     )
+    logger.info("Тест успешно завершился")
