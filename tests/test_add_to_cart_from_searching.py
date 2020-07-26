@@ -28,4 +28,6 @@ def test_add_to_cart_from_searching(app):
     app.goods_page.click_add_to_cart_button()
     text = app.goods_page.text_of_successfull_additional()
     assert text == SUCCESS_ADD_TO_CART_TEXT
+    app.goods_page.click_on_close_window_button()
+    assert app.goods_page.quantity_in_cart_text() == str(ADD_TO_CART_BLOUSES_NUMBER)
 

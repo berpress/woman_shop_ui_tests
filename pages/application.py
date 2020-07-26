@@ -7,6 +7,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from pages.contact_us import ContactUsForm
+from common.logging import setup
+
 from pages.goods_page import GoodsPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
@@ -16,11 +18,17 @@ from pages.order_page import OrderPage
 from pages.registration_page import RegistrationPage
 from pages.search_result_page import SearchResultPage
 from pages.subscribe_page import SubscribeFunction
+
 from pages.woman_category_page import WomanCategoryPage
+import logging
+
+logger = logging.getLogger()
 
 
 class Application:
     def __init__(self, base_url, headless):
+        setup('INFO')
+        logger.setLevel('INFO')
         driver_path = ChromeDriverManager().install()
         options: Options = Options()
         options.headless = headless
@@ -45,6 +53,7 @@ class Application:
 
     @allure.step("Открытие главной страницы")
     def open_main_page(self):
+        logger.info('Open main page')
         self.wd.get(self.base_url)
 
     @allure.step("Открытие страницы wishlist")
@@ -53,6 +62,9 @@ class Application:
             self.base_url
             + "index.php?fc=module&module=blockwishlist&controller=mywishlist"
         )
+        logger.info('Open wish list')
+        self.wd.get(self.base_url +
+                    'index.php?fc=module&module=blockwishlist&controller=mywishlist')
 
     @allure.step("Открытие страницы истории заказов")
     def open_order_history_page(self):
