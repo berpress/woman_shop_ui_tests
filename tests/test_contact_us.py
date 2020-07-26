@@ -1,6 +1,6 @@
 import allure
 
-from common.ContactUs_Constants import ContactUs
+from common.contact_us_constants import ContactUs
 from model.contact_us import ContactUsUserData
 
 

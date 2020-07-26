@@ -1,7 +1,7 @@
 import allure
 import logging
 
-from common.Login_Constants import AutorizedUser
+from common.login_constants import AutorizedUser
 from locators.login import LoginLocators
 from model.login import UserData
 
