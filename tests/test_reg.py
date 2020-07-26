@@ -1,9 +1,5 @@
-import faker
-
-from model.registration import RegistrationUserData
-
-
-fake = faker.Faker()
+import pytest
+from model.registration_model import RegistrationUserData
 
 
 def test_registration_positive(app):
@@ -19,19 +15,7 @@ def test_registration_positive(app):
     7. Нажимаем кнопку "Register"
     8. Проверяем, что оказались в личном кабинете
     """
-    user_data = RegistrationUserData(
-        email=fake.email(),
-        first_name="Vlad",
-        last_name="Lubomski",
-        password="123456",
-        address="Sverdlova str.",
-        city="Togliatty",
-        state="63",
-        postal_code="44036",
-        country="Russia",
-        mobile_phone="88008008080",
-        address_alias="tlt",
-    )
+    user_data = RegistrationUserData().random_user()
     app.open_main_page()
     app.login.logout_if_logged_in()
     app.registration.start_registration_process(user_data)
@@ -40,7 +24,8 @@ def test_registration_positive(app):
     app.login.logout_if_logged_in()
 
 
-def test_registration_negative(app):
+@pytest.mark.parametrize("fields", [("last_name", "state")])
+def test_registration_negative(app, fields):
     """
     Шаги
     1. Открываем главную страницу
@@ -53,19 +38,9 @@ def test_registration_negative(app):
     7. Нажимаем кнопку "Register"
     8. Проверяем, что не оказались в личном кабинете
     """
-    user_data = RegistrationUserData(
-        email=fake.email(),
-        first_name=None,
-        last_name="Lubomski",
-        password="123456",
-        address="Sverdlova str.",
-        city="Togliatty",
-        state="63",
-        postal_code="44036",
-        country="Russia",
-        mobile_phone="88008008080",
-        address_alias="tlt",
-    )
+    user_data = RegistrationUserData().random_user()
+    for field in fields:
+        setattr(user_data, field, None)
     app.open_main_page()
     app.login.logout_if_logged_in()
     app.registration.start_registration_process(user_data)

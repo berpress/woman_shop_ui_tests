@@ -1,5 +1,5 @@
-from locators.registration import RegistrationLocators
-from model.registration import RegistrationUserData
+from locators.registration_locators import RegistrationLocators
+import allure
 
 
 class RegistrationPage:
@@ -51,23 +51,30 @@ class RegistrationPage:
     def my_account(self):
         return self.app.wd.find_elements(*RegistrationLocators.MY_ACCOUNT)
 
-    def start_registration_process(self, user_data: RegistrationUserData):
+    @allure.step("Подготовка к регистрации - ввод емейла")
+    def start_registration_process(self, user_data):
         self.sign_in_page_button().click()
         self.email_for_create_input().send_keys(user_data.email)
         self.submit_create_button().click()
 
     def fill_input(self, element, value):
-        """Заполняет поле в зависимости от его типа и передаваемого значения"""
+        """Заполняет поле, если было передано значение value."""
         if value:
             element().send_keys(value)
 
-    def fill_requireds(self, user_data: RegistrationUserData):
+    def fill_select(self, element, value):
+        """Выбирает селект, если было передано значение value."""
+        if value:
+            element().click()
+
+    @allure.step("Заполнение полей, которым были переданы данные")
+    def fill_requireds(self, user_data):
         self.fill_input(self.first_name_input, user_data.first_name)
         self.fill_input(self.last_name_input, user_data.last_name)
         self.fill_input(self.password_input, user_data.password)
         self.fill_input(self.address_input, user_data.address)
         self.fill_input(self.city_input, user_data.city)
-        self.state_list().click()
+        self.fill_select(self.state_list(), user_data.state)
         self.fill_input(self.postal_code_input, user_data.postal_code)
         self.fill_input(self.mobile_phone_input, user_data.mobile_phone)
         self.register_button_input().click()
