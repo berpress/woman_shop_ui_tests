@@ -1,7 +1,7 @@
 import allure
 from pytest_testrail.plugin import testrail
 
-from common.Login_Constants import AutorizedUser
+from common.login_constants import AutorizedUser
 from model.login import UserData
 
 

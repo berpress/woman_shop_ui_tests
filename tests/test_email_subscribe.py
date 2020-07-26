@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from common.Subscribed_Contants import EmailSubscribe
+from common.subscribed_contants import EmailSubscribe
 
 
 @allure.suite("Подписка на email рассылку")
