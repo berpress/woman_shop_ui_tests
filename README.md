@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/berpress/woman_shop_ui_tests.svg?branch=master)](https://travis-ci.org/berpress/woman_shop_ui_tests)
-# Автотесты для онлайн магазина
+# Автотесты для онлайн магазина (курсы по автоматизации на Python для студентов)
 
 # UI tests
 
