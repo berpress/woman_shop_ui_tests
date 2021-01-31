@@ -18,11 +18,7 @@ def test_contact_us_field(app):
     7. Вводим сообщение в Message
     8. Кликаем на кнопку Send.
     """
-    user_data = ContactUsUserData(
-        email="orchid345617@gmail.com",
-        text="Text in order reference",
-        text_in_form="Text in message field",
-    )
+    user_data = ContactUsUserData.random_user_data()
     app.open_main_page()
     app.contact_us.find_and_click_contact_us_button()
     app.contact_us.click_on_subject_heading_button()
@@ -46,11 +42,7 @@ def test_contact_us_with_empty_subject_heading(app):
     7. Вводим сообщение в Message
     8. Кликаем на кнопку Send.
     """
-    user_data = ContactUsUserData(
-        email="orchid345617@gmail.com",
-        text="Text in order reference",
-        text_in_form="Text in message field",
-    )
+    user_data = ContactUsUserData.random_user_data()
     app.open_main_page()
     app.contact_us.find_and_click_contact_us_button()
     # app.contact_us.click_on_choose_file(create_tmp_file())
@@ -76,9 +68,8 @@ def test_contact_us_with_empty_email(app):
     7. Вводим сообщение в Message
     8. Кликаем на кнопку Send.
     """
-    user_data = ContactUsUserData(
-        email=None, text="Text in order reference", text_in_form="Text in message field"
-    )
+    user_data = ContactUsUserData.random_user_data()
+    user_data.email = None
     app.open_main_page()
     app.contact_us.find_and_click_contact_us_button()
     app.contact_us.click_on_subject_heading_button()
@@ -104,11 +95,8 @@ def test_contact_us_with_empty_message(app):
     7. Ничего не вводим в поле Message
     8. Кликаем на кнопку Send.
     """
-    user_data = ContactUsUserData(
-        email="orchid345617@gmail.com",
-        text="Text in order reference",
-        text_in_form=None,
-    )
+    user_data = ContactUsUserData.random_user_data()
+    user_data.text_in_form = None
     app.open_main_page()
     app.contact_us.find_and_click_contact_us_button()
     app.contact_us.click_on_subject_heading_button()
